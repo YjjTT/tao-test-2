@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/YjjTT/tao-test/issues"
   },
-  "homepage": "https://github.com/YjjTT/tao-test#readme"
+  "homepage": "https://github.com/YjjTT/tao-test#readme",
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "typescript": "^3.6.2",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8"
+  }
 }
