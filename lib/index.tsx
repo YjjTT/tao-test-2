@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDom from 'react-dom';
+import React from "react";
+import ReactDom from "react-dom";
+import Button from "./button";
 
-console.log(React)
-console.log(ReactDom)
+ReactDom.render(<Button></Button>, document.body);
