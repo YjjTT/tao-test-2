@@ -1,4 +1,5 @@
-console.log('hi2')
-const div = document.createElement('div')
-div.innerText = 'div'
-document.body.appendChild(div)
+import React from "react";
+import ReactDom from "react-dom";
+import Icon from "./icon";
+
+ReactDom.render(<div><Icon name="wechat"></Icon></div>, document.body);

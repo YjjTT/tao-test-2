@@ -23,8 +23,10 @@
   "devDependencies": {
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
+    "@types/jest": "^24.0.18",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/react-test-renderer": "^16.9.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-jest": "^24.9.0",
     "cross-env": "^5.2.1",
