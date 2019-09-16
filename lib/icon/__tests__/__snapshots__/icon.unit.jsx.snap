@@ -9,13 +9,3 @@ exports[`icon render success 是个 svg 1`] = `
   />
 </svg>
 `;
-
-exports[`icon 是个 svg 1`] = `
-<svg
-  className="tui-icon"
->
-  <use
-    xlinkHref="#undefined"
-  />
-</svg>
-`;
