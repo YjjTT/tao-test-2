@@ -11,7 +11,7 @@
     "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT_DIR=./test-results/jest jest --config=jest.config.js"
   },
   "jest-junit": {
-    "outputName": "result.xml"
+    "outputName": "results.xml"
   },
   "repository": {
     "type": "git",
