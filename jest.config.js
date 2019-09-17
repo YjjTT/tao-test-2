@@ -6,7 +6,7 @@ module.exports = {
   collectCoverageFrom: ["lib/**/*.{ts,tsx}", "!**/node_modules/**"],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov'],
-  reporters: ["default", "jest-junit"],
+  reporters: ["default", ["jest-junit", {suiteName: "results"}]],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleDirectories: ['node_modules'],
   moduleNameMapper: {
