@@ -43,13 +43,17 @@ jobs:
           at: .
       - run: yarn ci
       - store_test_results:
-          path: test-results￿
+          path: test-results
   publish:
     <<: *defaults
     steps:
       - attach_workspace:
           at: .
-      - run: yarn publish
+      - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+      - run: npm publish
+
+
+
 workflows:
   version: 2
   build_accept_deploy:
@@ -64,3 +68,8 @@ workflows:
       - publish:
           requires:
             - build
+          filters:
+            tags:
+              only: /^v[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
