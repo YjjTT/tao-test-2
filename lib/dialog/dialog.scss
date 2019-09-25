@@ -14,4 +14,19 @@
     height: 100%;
     background: fade_out(black, 0.5);
   }
+  &-header {
+  }
+  &-main {
+  }
+  &-footer {}
+  &-close {
+    position: absolute;
+    bottom: 100%;
+    left: 100%;
+    width: 2em;
+    height: 2em;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+  }
 }
