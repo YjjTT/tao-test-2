@@ -23,7 +23,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
       props.onClose(e)
     }
   }
-  const x = props.visable ?
+  const result = props.visable ?
     <Fragment>
       <div className={tui('mask')} onClick={onClickMask}></div>
       <div className={tui()}>
@@ -47,7 +47,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
     :
     null
   return (
-    ReactDom.createPortal(x, document.body)
+    ReactDom.createPortal(result, document.body)
   )
 }
 Dialog.defaultProps = {
