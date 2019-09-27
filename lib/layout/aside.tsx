@@ -1,8 +1,7 @@
 import React from 'react';
+import {scopedClassMaker} from "../../helpers/classes";
 
-import {scopedClassMaker} from "../classes";
-
-const sc = scopedClassMaker('tui-layout')
+const sc = scopedClassMaker('tui-layout');
 interface Props extends React.HTMLAttributes<HTMLElement> {
 
 }
@@ -11,6 +10,6 @@ const Aside: React.FunctionComponent<Props> = (props) => {
   return (
     <div className={sc('aside', {extra: className})} {...rest}>aside</div>
   )
-}
+};
 
 export default Aside;

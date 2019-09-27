@@ -1,7 +1,7 @@
 import React from 'react';
-import {scopedClassMaker} from "../classes";
+import {scopedClassMaker} from "../../helpers/classes";
 
-const sc = scopedClassMaker('tui-layout')
+const sc = scopedClassMaker('tui-layout');
 interface Props extends React.HTMLAttributes<HTMLElement> {
 
 }
