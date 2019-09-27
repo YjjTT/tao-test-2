@@ -26,7 +26,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
   const result = props.visable ?
     <Fragment>
       <div className={tui('mask')} onClick={onClickMask}></div>
-      <div className={tui()}>
+      <div className={tui('')}>
         <div className={tui('close')} onClick={onClickClose}>
           <Icon name="close"/>
         </div>

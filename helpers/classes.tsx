@@ -12,8 +12,8 @@ interface ClassSwitch {
   [K: string]: boolean
 }
 
-function scopedClassMaker(prefix: string) {
-  return (name: string | ClassSwitch, options?: Options) =>
+const scopedClassMaker = (prefix: string) =>
+  (name: string | ClassSwitch, options?: Options) =>
     Object
       .entries(name instanceof Object ? name : {[name]: name})
       .filter(kv => kv[1] !== false)
@@ -21,6 +21,5 @@ function scopedClassMaker(prefix: string) {
       .map(name => [prefix, name].filter(Boolean).join('-'))
       .concat(options && options.extra || [])
       .join(' ');
-}
 
 export {scopedClassMaker};
