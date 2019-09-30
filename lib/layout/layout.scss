@@ -1,9 +1,8 @@
 @import "../helper";
-
-.tui-layout{
+.tui-layout {
   display: flex;
   flex-direction: column;
-  &-content{
+  &-content {
     flex-grow: 1;
   }
   & & {
@@ -12,7 +11,7 @@
   }
   &-hasAside {
     flex-direction: row;
-    .tui-layout{
+    .tui-layout {
       flex-direction: column;
     }
   }
