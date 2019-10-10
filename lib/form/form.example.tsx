@@ -19,27 +19,27 @@ const FormExample: React.FunctionComponent = () => {
       {key: 'username', minLength: 8, maxLength: 16},
       {key: 'username', pattern: /^[A-Za-z0-9]+$/},
       {key: 'password', required: true}
-    ]
+    ];
     const errors = Validator(formData, rules);
     setErrors(errors);
-    if (noError(errors)){
+    if (noError(errors)) {
       console.log('无错误');
     }
   };
   return (
-      <Form
-        value={formData}
-        fields={fields}
-        buttons={
-          <Fragment>
-            <button type='submit'>提交</button>
-            <button>返回</button>
-          </Fragment>
-        }
-        onSubmit={onSubmit}
-        errors={errors}
-        onChange={(newValue) => setFormData(newValue)}
-      />
+    <Form
+      value={formData}
+      fields={fields}
+      buttons={
+        <Fragment>
+          <button type='submit'>提交</button>
+          <button>返回</button>
+        </Fragment>
+      }
+      onSubmit={onSubmit}
+      errors={errors}
+      onChange={(newValue) => setFormData(newValue)}
+    />
   );
 };
 export default FormExample;
