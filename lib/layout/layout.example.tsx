@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Layout from "./layout";
 import Footer from "./footer";
 import Content from "./content";
@@ -51,6 +51,6 @@ const LayoutExample: React.FunctionComponent = () => {
         </Layout>
       </div>
     </div>
-  )
-}
+  );
+};
 export default LayoutExample;
