@@ -1,0 +1,30 @@
+@import "../helper";
+
+.tui-button {
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 22px;
+  transition: all 250ms;
+  border-radius: 4px;
+  &:focus {
+    outline: none;
+  }
+  &-normal {
+    color: #333;
+    border: 1px solid lighten(#333, 50%);
+    background: white;
+    &:focus, &:hover{
+      border-color: $main-color;
+      color: $main-color;
+    }
+  }
+  &-important {
+    color: white;
+    border: 1px solid $main-color;
+    background: $main-color;
+    &:focus, &:hover{
+      background: lighten($main-color, 10%);
+      border-color: lighten($main-color, 10%);
+    }
+  }
+}

@@ -43,7 +43,10 @@ const Form: React.FunctionComponent<Props> = (props) => {
             </td>
           </tr>
         )}
-        <div>{props.buttons}</div>
+        <tr className="tui-form-tr">
+          <td className="tui-form-td"/>
+          <td className="tui-form-td">{props.buttons}</td>
+        </tr>
       </table>
     </form>
   );

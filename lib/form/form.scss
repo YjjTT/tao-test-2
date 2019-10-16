@@ -1,0 +1,27 @@
+.tui-form {
+  &-tr {
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  &-td {
+    padding-top: 0;
+    padding-bottom: 32px;
+  }
+  &-tr:first-child {
+    .tui-form-td {
+      padding-top: 0;
+    }
+  }
+  &-tr:last-child {
+    .tui-form-td {
+      padding-bottom: 0;
+    }
+  }
+  &-td + &-td {
+    padding-left: 0px;
+  }
+}
