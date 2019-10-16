@@ -1,5 +1,8 @@
 import * as React from "react";
 import {ReactFragment} from "react";
+import Input from "../input/input";
+import classes from "../../helpers/classes";
+import './form.scss';
 
 export interface FormValue {
   [K: string]: any
@@ -26,16 +29,22 @@ const Form: React.FunctionComponent<Props> = (props) => {
   };
   return (
     <form onSubmit={onSubmit}>
-      {props.fields.map(f =>
-        <div key={f.name}>
-          {f.label}
-          <input type={f.input.type} value={formData[f.name]}
-                 onChange={(e) => onInputChange(f.name, e.target.value)}
-          />
-          <div>{props.errors[f.name]}</div>
-        </div>
-      )}
-      <div>{props.buttons}</div>
+      <table>
+        {props.fields.map(f =>
+          <tr className={classes('tui-form-tr')} key={f.name}>
+            <td className="tui-form-td">
+             <span className="tui-form-label">{f.label}</span>
+            </td>
+            <td className="tui-form-td">
+              <Input className="tui-form-input" type={f.input.type} value={formData[f.name]}
+                     onChange={(e) => onInputChange(f.name, e.target.value)}
+              />
+              <div>{props.errors[f.name]}</div>
+            </td>
+          </tr>
+        )}
+        <div>{props.buttons}</div>
+      </table>
     </form>
   );
 };

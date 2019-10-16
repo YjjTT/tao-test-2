@@ -1,7 +1,7 @@
 import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 import React from 'react';
 import ReactDom from 'react-dom';
-import ButtonExample from "./lib/button.example";
+import ButtonExample from "./lib/button/button.example";
 import DialogExample from "./lib/dialog/dialog.example";
 import LayoutExample from "./lib/layout/layout.example";
 import {Layout, Header, Content, Footer, Aside} from './lib/layout/layout';
