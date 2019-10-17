@@ -4,7 +4,7 @@ import {Fragment, useState} from "react";
 import Validator, {noError} from "./validator";
 import Button from "../button/button";
 
-const usernames = ['frank', 'jack', 'bob'];
+const usernames = ['frank', 'jack', 'bob', 'jiangtaojiangtao'];
 const checkUserName = (username: string, success: () => void, fail: () => void) => {
   setTimeout(() => {
     console.log('我现在知道用户名是否存在');
@@ -13,7 +13,7 @@ const checkUserName = (username: string, success: () => void, fail: () => void) 
     } else {
       success()
     }
-  }, 6000);
+  }, 1000);
 };
 
 const FormExample: React.FunctionComponent = () => {
@@ -34,7 +34,7 @@ const FormExample: React.FunctionComponent = () => {
       {key: 'password', required: true},
       {
         key: 'username', validator: {
-          name: 'sss',
+          name: 'unique',
           validate(username: string) {
             return new Promise<void>((resolve, reject) => {
               checkUserName(username, resolve, reject);
@@ -44,13 +44,21 @@ const FormExample: React.FunctionComponent = () => {
       }
     ];
     Validator(formData, rules, (errors) => {
-      console.log(errors);
       setErrors(errors);
       if (noError(errors)) {
         console.log('无错误');
       }
     });
   };
+  const transformError = (message:string) => {
+    const map: any = {
+      unique: 'username is taken',
+      required: 'required',
+      minLength: 'too short',
+      maxLength: 'too long'
+    }
+    return map[message];
+  }
   return (
     <Form
       value={formData}
@@ -63,6 +71,7 @@ const FormExample: React.FunctionComponent = () => {
       }
       onSubmit={onSubmit}
       errors={errors}
+      transformError={transformError}
       onChange={(newValue) => setFormData(newValue)}
     />
   );
