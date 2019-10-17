@@ -1,4 +1,10 @@
 .tui-form {
+  &-table{
+    border-collapse: collapse;
+  }
+  &-label {
+    line-height: 32px;
+  }
   &-tr {
     &:first-child {
       margin-top: 0;
@@ -9,7 +15,8 @@
   }
   &-td {
     padding-top: 0;
-    padding-bottom: 32px;
+    padding-bottom: 8px;
+    vertical-align: top;
   }
   &-tr:first-child {
     .tui-form-td {
@@ -22,6 +29,11 @@
     }
   }
   &-td + &-td {
-    padding-left: 0px;
+    padding-left: 16px;
+  }
+  &-error{
+    color: red;
+    font-size: 0.8em;
+    margin-top: 4px;
   }
 }

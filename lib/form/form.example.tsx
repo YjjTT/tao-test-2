@@ -4,6 +4,18 @@ import {Fragment, useState} from "react";
 import Validator, {noError} from "./validator";
 import Button from "../button/button";
 
+const usernames = ['frank', 'jack', 'bob'];
+const checkUserName = (username: string, success: () => void, fail: () => void) => {
+  setTimeout(() => {
+    console.log('我现在知道用户名是否存在');
+    if (usernames.indexOf(username) >= 0) {
+      fail()
+    } else {
+      success()
+    }
+  }, 6000);
+};
+
 const FormExample: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<FormValue>({
     username: '',
@@ -19,13 +31,25 @@ const FormExample: React.FunctionComponent = () => {
       {key: 'username', required: true},
       {key: 'username', minLength: 8, maxLength: 16},
       {key: 'username', pattern: /^[A-Za-z0-9]+$/},
-      {key: 'password', required: true}
+      {key: 'password', required: true},
+      {
+        key: 'username', validator: {
+          name: 'sss',
+          validate(username: string) {
+            return new Promise<void>((resolve, reject) => {
+              checkUserName(username, resolve, reject);
+            });
+          }
+        }
+      }
     ];
-    const errors = Validator(formData, rules);
-    setErrors(errors);
-    if (noError(errors)) {
-      console.log('无错误');
-    }
+    Validator(formData, rules, (errors) => {
+      console.log(errors);
+      setErrors(errors);
+      if (noError(errors)) {
+        console.log('无错误');
+      }
+    });
   };
   return (
     <Form
