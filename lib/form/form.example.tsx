@@ -4,7 +4,7 @@ import {Fragment, useState} from "react";
 import Validator, {noError} from "./validator";
 import Button from "../button/button";
 
-const usernames = ['frank', 'jack', 'bob', 'jiangtaojiangtao'];
+const usernames = ['frank', 'jack', 'bob', 'hahahahaha'];
 const checkUserName = (username: string, success: () => void, fail: () => void) => {
   setTimeout(() => {
     console.log('我现在知道用户名是否存在');
@@ -26,23 +26,19 @@ const FormExample: React.FunctionComponent = () => {
     {name: 'password', label: '密码', input: {type: 'password'}}
   ]);
   const [errors, setErrors] = useState({});
+  const validator = (username: string) => {
+    return new Promise<string>((resolve, reject) => {
+      checkUserName(username, resolve, ()=>reject('unique'));
+    });
+  }
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const rules = [
       {key: 'username', required: true},
       {key: 'username', minLength: 8, maxLength: 16},
       {key: 'username', pattern: /^[A-Za-z0-9]+$/},
       {key: 'password', required: true},
-      {
-        key: 'username', validator: {
-          name: 'unique',
-          validate(username: string) {
-            return new Promise<void>((resolve, reject) => {
-              checkUserName(username, resolve, reject);
-            });
-          }
-        }
-      }
-    ];
+      {key: 'username', validator}
+    ]
     Validator(formData, rules, (errors) => {
       setErrors(errors);
       if (noError(errors)) {
