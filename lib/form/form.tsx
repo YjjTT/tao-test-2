@@ -39,7 +39,6 @@ const Form: React.FunctionComponent<Props> = (props) => {
   };
   return (
     <form onSubmit={onSubmit}>
-      {JSON.stringify(props.errors)}
       <table className="tui-form-table">
         <tbody>
         {props.fields.map(f =>
