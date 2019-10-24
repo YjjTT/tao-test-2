@@ -1,17 +1,25 @@
 import * as React from "react";
-import {HTMLAttributes, useEffect, useRef, useState} from "react";
+import {HTMLAttributes, MouseEventHandler, useEffect, useRef, useState} from "react";
 import './scroll.scss';
 import scrollbarWidth from './scroll-width';
 import {UIEventHandler} from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-
 }
 
 const Scroll: React.FunctionComponent<Props> = (props) => {
   const {children, ...rest} = props;
-  const [barHeight, setBarHeight] = useState(0)
-  const [barTop, setBarTop] = useState(0);
+  const [barHeight, setBarHeight] = useState(0);
+  const [barTop, _setBarTop] = useState(0);
+  const setBarTop = (number: number) => {
+    const {current} = containerRef;
+    const scrollHeight = current!.scrollHeight; // 滚动全高
+    const viewHeight = current!.getBoundingClientRect().height; // 可视区域高度
+    const maxBarTop = (scrollHeight - viewHeight) * viewHeight / scrollHeight;
+    if (number < 0) {return;}
+    if (number > maxBarTop) {return;}
+    _setBarTop(number);
+  };
   const onScroll: UIEventHandler = (e) => {
     const {current} = containerRef;
     const scrollHeight = current!.scrollHeight; // 滚动全高
@@ -20,11 +28,39 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     setBarTop(scrollTop * viewHeight / scrollHeight);
   };
   const containerRef = useRef<HTMLDivElement>(null);
-  useEffect(()=>{ // mounted的时候 算滚动条的高度
+  useEffect(() => { // mounted的时候 算滚动条的高度
     const {current} = containerRef;
     const scrollHeight = current!.scrollHeight; // 滚动全高
     const viewHeight = current!.getBoundingClientRect().height; // 可视区域高度
     setBarHeight(viewHeight * viewHeight / scrollHeight);
+  }, []);
+  const draggingRef = useRef(false);
+  const firstYRef = useRef(0);
+  const firstBarTopRef = useRef(0);
+  const onMouseDownBar: MouseEventHandler = (e) => {
+    draggingRef.current = true;
+    firstYRef.current = e.clientY;
+    firstBarTopRef.current = barTop;
+  };
+
+  const onMouseMoveBar = (e: MouseEvent) => {
+    if (draggingRef.current) {
+      const delta = e.clientY - firstYRef.current;
+      setBarTop(firstBarTopRef.current + delta);
+    }
+  };
+
+  const onMouseUpBar = () => {
+    draggingRef.current = false;
+  };
+
+  useEffect(() => {
+    document.addEventListener('mouseup', onMouseUpBar);
+    document.addEventListener('mousemove', onMouseMoveBar);
+    return () => {
+      document.removeEventListener('mouseup', onMouseUpBar);
+      document.removeEventListener('mousemove', onMouseMoveBar);
+    };
   }, []);
   return (
     <div className="tui-scroll" {...rest}>
@@ -34,7 +70,9 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
         {props.children}
       </div>
       <div className="tui-scroll-track">
-        <div className="tui-scroll-bar" style={{height: barHeight, transform: `translateY(${barTop}px)`}} />
+        <div className="tui-scroll-bar" style={{height: barHeight, transform: `translateY(${barTop}px)`}}
+             onMouseDown={onMouseDownBar}
+        />
       </div>
     </div>
   );
