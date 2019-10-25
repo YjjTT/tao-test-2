@@ -59,9 +59,9 @@ workflows:
       - build:
           requires:
             - test
-#      - test:
-#          requires:
-#            - prepare
+      - test:
+          requires:
+            - prepare
       - publish:
           requires:
             - build
