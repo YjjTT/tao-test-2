@@ -1,0 +1,35 @@
+.button_demo_container {
+  section {
+    padding: 20px 20px 0 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+    h1 {
+      color: #0d1a26;
+      font-size: 30px;
+      line-height: 38px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      margin-top: 8px;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      color: rgba(0,0,0,0.65);
+      margin: 14px 0;
+    }
+  }
+  &_example {
+    max-width: 1000px;
+    margin: 20px auto;
+    .container {
+      padding: 40px 32px;
+      margin: 20px auto;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 4px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}
