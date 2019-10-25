@@ -46,7 +46,12 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
   const onMouseMoveBar = (e: MouseEvent) => {
     if (draggingRef.current) {
       const delta = e.clientY - firstYRef.current;
-      setBarTop(firstBarTopRef.current + delta);
+      const newBarTop = firstBarTopRef.current + delta
+      setBarTop(newBarTop);
+      const {current} = containerRef;
+      const scrollHeight = current!.scrollHeight; // 滚动全高
+      const viewHeight = current!.getBoundingClientRect().height; // 可视区域高度
+      current!.scrollTop = newBarTop * scrollHeight / viewHeight;
     }
   };
 
@@ -54,12 +59,18 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     draggingRef.current = false;
   };
 
+  const onSelect = (e: Event) => {
+    if (draggingRef.current) {e.preventDefault()}
+  }
+
   useEffect(() => {
     document.addEventListener('mouseup', onMouseUpBar);
     document.addEventListener('mousemove', onMouseMoveBar);
+    document.addEventListener('selectstart', onSelect)
     return () => {
       document.removeEventListener('mouseup', onMouseUpBar);
       document.removeEventListener('mousemove', onMouseMoveBar);
+      document.removeEventListener('selectstart', onSelect)
     };
   }, []);
   return (
