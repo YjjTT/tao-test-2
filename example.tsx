@@ -20,28 +20,33 @@ ReactDom.render((
       <Layout>
         <Aside className="site-aside">
           <ul>
+            <li><NavLink to="/">tui-react</NavLink></li>
+            <li><NavLink to="/ss">tui-react</NavLink></li>
+            <li><NavLink to="/dd">tui-react</NavLink></li>
             <li>
-              <div className="site-aside-title">通用</div>
               <ul>
-                <li><NavLink to="/icon">Icon&nbsp;图标</NavLink></li>
-                <li><NavLink to="/button">Button&nbsp;按钮</NavLink></li>
+                <li>
+                  <div className="site-aside-title">通用</div>
+                    <li><NavLink to="/icon">Icon&nbsp;图标</NavLink></li>
+                    <li><NavLink to="/button">Button&nbsp;按钮</NavLink></li>
+                </li>
+                <li>
+                  <div className="site-aside-title">布局</div>
+                  <li><NavLink to="/layout">Layout&nbsp;布局</NavLink></li>
+                </li>
+                <li>
+                  <div className="site-aside-title">数据相关</div>
+                  <li><NavLink to="/form">Form&nbsp;表单</NavLink></li>
+                </li>
+                <li>
+                  <div className="site-aside-title">信息反馈</div>
+                  <li><NavLink to="/dialog">Dialog&nbsp;弹框</NavLink></li>
+                </li>
+                <li>
+                  <div className="site-aside-title">其他</div>
+                  <li><NavLink to="/scroll">Scroll&nbsp;滚动</NavLink></li>
+                </li>
               </ul>
-            </li>
-            <li>
-              <div className="site-aside-title">布局</div>
-              <li><NavLink to="/layout">Layout&nbsp;布局</NavLink></li>
-            </li>
-            <li>
-              <div className="site-aside-title">数据相关</div>
-              <li><NavLink to="/form">Form&nbsp;表单</NavLink></li>
-            </li>
-            <li>
-              <div className="site-aside-title">信息反馈</div>
-              <li><NavLink to="/dialog">Dialog&nbsp;弹框</NavLink></li>
-            </li>
-            <li>
-              <div className="site-aside-title">其他</div>
-              <li><NavLink to="/scroll">Scroll&nbsp;滚动</NavLink></li>
             </li>
           </ul>
         </Aside>
