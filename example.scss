@@ -51,6 +51,14 @@ $border-color: #EEEEEE;
   }
   ul {
     min-width: 12em;
+    span {
+      height: 40px;
+      font-size: 14px;
+      line-height: 40px;
+      font-weight: 800;
+      color: rgba(0,0,0,0.65);
+      padding: 4px $padding*2;
+    }
     > li {
       a {
         padding: 4px $padding*2;

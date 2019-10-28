@@ -1,4 +1,4 @@
-import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
+import {HashRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
 import React from 'react';
 import ReactDom from 'react-dom';
 import DialogExample from "./lib/dialog/dialog.example";
@@ -10,6 +10,7 @@ import IconDemo from "./lib/icon/icon.demo";
 import FormExample from "./lib/form/form.example";
 import ScrollExample from "./lib/scroll/scroll.example";
 import ButtonDemo from "./lib/button/button.demo";
+import Introduce from "./introduce/introduce";
 
 ReactDom.render((
   <Router>
@@ -20,9 +21,9 @@ ReactDom.render((
       <Layout>
         <Aside className="site-aside">
           <ul>
-            <li><NavLink to="/">tui-react</NavLink></li>
-            <li><NavLink to="/ss">tui-react</NavLink></li>
-            <li><NavLink to="/dd">tui-react</NavLink></li>
+            <li><NavLink exact to="/">TUI-react</NavLink></li>
+            <li><NavLink to="/ss">开始使用</NavLink></li>
+            <span>Components</span>
             <li>
               <ul>
                 <li>
@@ -51,12 +52,15 @@ ReactDom.render((
           </ul>
         </Aside>
         <Content className="site-main">
-          <Route path="/icon" component={IconDemo}/>
-          <Route path="/button" component={ButtonDemo}/>
-          <Route path="/dialog" component={DialogExample}/>
-          <Route path="/layout" component={LayoutExample}/>
-          <Route path="/form" component={FormExample}/>
-          <Route path="/scroll" component={ScrollExample} />
+          <Switch>
+            <Route path="/" exact component={Introduce}/>
+            <Route path="/icon" exact component={IconDemo}/>
+            <Route path="/button" exact component={ButtonDemo}/>
+            <Route path="/dialog" exact component={DialogExample}/>
+            <Route path="/layout" exact component={LayoutExample}/>
+            <Route path="/form" exact component={FormExample}/>
+            <Route path="/scroll" exact component={ScrollExample} />
+          </Switch>
         </Content>
       </Layout>
       <Footer className="site-footer">
