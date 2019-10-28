@@ -12,11 +12,15 @@ import ScrollExample from "./lib/scroll/scroll.example";
 import ButtonDemo from "./lib/button/button.demo";
 import Introduce from "./introduce/introduce";
 
+const logoHandleClick = () => {
+  window.open("https://github.com/YjjTT/tao-test-2")
+}
 ReactDom.render((
   <Router>
     <Layout className="site-page">
       <Header className="site-header">
-        <Icon name="logo" className="site-logo"></Icon>
+        <Icon name="logo" className="site-logo" />
+        <Icon name="github" className="site-logo-git" onClick={logoHandleClick} />
       </Header>
       <Layout>
         <Aside className="site-aside">
@@ -28,24 +32,36 @@ ReactDom.render((
               <ul>
                 <li>
                   <div className="site-aside-title">通用</div>
-                    <li><NavLink to="/icon">Icon&nbsp;图标</NavLink></li>
-                    <li><NavLink to="/button">Button&nbsp;按钮</NavLink></li>
+                    <ul>
+                      <li>
+                        <NavLink to="/icon">Icon&nbsp;图标</NavLink>
+                      </li>
+                      <li><NavLink to="/button">Button&nbsp;按钮</NavLink></li>
+                    </ul>
                 </li>
                 <li>
                   <div className="site-aside-title">布局</div>
-                  <li><NavLink to="/layout">Layout&nbsp;布局</NavLink></li>
+                  <ul>
+                    <li><NavLink to="/layout">Layout&nbsp;布局</NavLink></li>
+                  </ul>
                 </li>
                 <li>
                   <div className="site-aside-title">数据相关</div>
-                  <li><NavLink to="/form">Form&nbsp;表单</NavLink></li>
+                  <ul>
+                    <li><NavLink to="/form">Form&nbsp;表单</NavLink></li>
+                  </ul>
                 </li>
                 <li>
                   <div className="site-aside-title">信息反馈</div>
-                  <li><NavLink to="/dialog">Dialog&nbsp;弹框</NavLink></li>
+                  <ul>
+                    <li><NavLink to="/dialog">Dialog&nbsp;弹框</NavLink></li>
+                  </ul>
                 </li>
                 <li>
                   <div className="site-aside-title">其他</div>
-                  <li><NavLink to="/scroll">Scroll&nbsp;滚动</NavLink></li>
+                  <ul>
+                    <li><NavLink to="/scroll">Scroll&nbsp;滚动</NavLink></li>
+                  </ul>
                 </li>
               </ul>
             </li>

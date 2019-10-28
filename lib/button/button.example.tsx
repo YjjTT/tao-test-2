@@ -4,9 +4,10 @@ import Button from "./button";
 const ButtonExample: React.FunctionComponent = () => {
   return (
     <div>
-      <Button level="normal">按钮</Button>
-      <Button level="important">按钮</Button>
-      <Button level="danger">按钮</Button>
+      <Button level="normal">Default</Button>
+      <Button level="important">Primary</Button>
+      <Button level="dashed">Dashed</Button>
+      <Button level="danger">Danger</Button>
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import Highlight, {defaultProps} from 'prism-react-renderer';
+import './demo.scss';
 
 interface Props {
-  code: string
+  code: string,
+  subtitle?: string
 }
 
 const Demo: React.FunctionComponent<Props> = (props) => {
@@ -23,12 +25,15 @@ const Demo: React.FunctionComponent<Props> = (props) => {
     </Highlight>
   )
   return (
-    <div>
+    <div className="example_container">
       <div className="example">
         {props.children}
       </div>
-      <div>
-        <button onClick={() => setCodeVisiable(!codeVisiable)}>查看代码</button>
+      <div className="demo_container">
+        <p>{props.subtitle}</p>
+        {props.subtitle && <img src={require('./lib/icons/sandbox.png')} alt="" onClick={() => setCodeVisiable(!codeVisiable)}/>}
+      </div>
+      <div className="code_container">
         {codeVisiable && code}
       </div>
     </div>

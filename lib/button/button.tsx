@@ -4,7 +4,7 @@ import classes from "../../helpers/classes";
 import './button.scss';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  level?: 'important' | 'danger' | 'normal'
+  level?: 'important' | 'danger' | 'normal' | 'dashed'
 }
 
 const Button: React.FunctionComponent<Props> = (props) => {

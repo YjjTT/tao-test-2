@@ -7,7 +7,7 @@ a {text-decoration: none; color: inherit;}
 body {font-size: 16px;}
 pre { font-family: "Fira Code Medium", Consolas, monospace}
 $padding: 16px;
-$main-color: #00ADB5;
+$main-color: #1890ff;
 $border-color: #EEEEEE;
 .site-page {
   background: #ffffff;
@@ -17,17 +17,27 @@ $border-color: #EEEEEE;
   padding-top: $padding;
 }
 .site-header {
-  background: $border-color;
+  background: white;
   padding: 8px 0;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .site-logo-git {
+    margin-right: $padding;
+    cursor: pointer;
+    width: 2em;
+    height: 2em;
+  }
   .site-logo {
-    width: 5em;
-    height: 5em;
+    width: 3em;
+    height: 3em;
     margin-left: $padding;
-    display: flex;
-    align-items: center;
   }
 }
 .site-aside {
+  margin-top: 16px;
   background: #ffffff;
   margin-right: $padding;
   border-right: 1px solid $border-color;
@@ -60,6 +70,7 @@ $border-color: #EEEEEE;
       padding: 4px $padding*2;
     }
     > li {
+      position: relative;
       a {
         padding: 4px $padding*2;
         display: block;
@@ -75,8 +86,19 @@ $border-color: #EEEEEE;
           color: $main-color;
         }
         &.active {
-          color: white;
-          background: $main-color;
+          color: $main-color;
+          background: #e6f7ff;
+          &::after {
+            box-sizing: border-box;
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            border-right: 3px solid $main-color;
+            opacity: 1;
+            display: block;
+          }
         }
       }
     }
