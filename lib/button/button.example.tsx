@@ -8,6 +8,7 @@ const ButtonExample: React.FunctionComponent = () => {
       <Button level="important">Primary</Button>
       <Button level="dashed">Dashed</Button>
       <Button level="danger">Danger</Button>
+      <Button level="forbidden" disabled>Forbidden</Button>
     </div>
   );
 };
