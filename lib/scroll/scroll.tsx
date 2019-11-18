@@ -1,11 +1,12 @@
 import * as React from "react";
-import {HTMLAttributes, MouseEventHandler, useEffect, useRef, useState} from "react";
+import {HTMLAttributes, MouseEventHandler, TouchEventHandler, useEffect, useRef, useState} from "react";
 import './scroll.scss';
 import scrollbarWidth from './scroll-width';
 import {UIEventHandler} from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
 }
+
 // 判断是否是触屏
 // const isTouchDevice: boolean = 'ontouchstart' in document.documentElement;
 
@@ -13,7 +14,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
   const {children, ...rest} = props;
   const [barHeight, setBarHeight] = useState(0);
   const [barTop, _setBarTop] = useState(0);
-  const [scrollBarVisible, setScrollBarVisible] = useState(false)
+  const [scrollBarVisible, setScrollBarVisible] = useState(false);
   const setBarTop = (number: number) => {
     const {current} = containerRef;
     const scrollHeight = current!.scrollHeight; // 滚动全高
@@ -31,10 +32,10 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     const viewHeight = current!.getBoundingClientRect().height; // 可视区域高度
     const scrollTop = current!.scrollTop;
     setBarTop(scrollTop * viewHeight / scrollHeight);
-    if (timerIdRef.current !== null){
-      window.clearTimeout(timerIdRef.current!)
+    if (timerIdRef.current !== null) {
+      window.clearTimeout(timerIdRef.current!);
     }
-    timerIdRef.current = window.setTimeout(()=>{
+    timerIdRef.current = window.setTimeout(() => {
       setScrollBarVisible(false);
     }, 300);
   };
@@ -46,7 +47,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     setBarHeight(viewHeight * viewHeight / scrollHeight);
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
 
   }, [scrollBarVisible]);
 
@@ -62,7 +63,7 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
   const onMouseMoveBar = (e: MouseEvent) => {
     if (draggingRef.current) {
       const delta = e.clientY - firstYRef.current;
-      const newBarTop = firstBarTopRef.current + delta
+      const newBarTop = firstBarTopRef.current + delta;
       setBarTop(newBarTop);
       const {current} = containerRef;
       const scrollHeight = current!.scrollHeight; // 滚动全高
@@ -76,24 +77,59 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
   };
 
   const onSelect = (e: Event) => {
-    if (draggingRef.current) {e.preventDefault()}
-  }
+    if (draggingRef.current) {e.preventDefault();}
+  };
 
   useEffect(() => {
     document.addEventListener('mouseup', onMouseUpBar);
     document.addEventListener('mousemove', onMouseMoveBar);
-    document.addEventListener('selectstart', onSelect)
+    document.addEventListener('selectstart', onSelect);
     return () => {
       document.removeEventListener('mouseup', onMouseUpBar);
       document.removeEventListener('mousemove', onMouseMoveBar);
-      document.removeEventListener('selectstart', onSelect)
+      document.removeEventListener('selectstart', onSelect);
     };
   }, []);
+  const [translateY, _setTranslateY] = useState(0);
+  const setTranslateY = (y: number) => {
+    if (y < 0) {y = 0} else if(y > 150) {y = 150}
+    _setTranslateY(y);
+  }
+  const lastYRef = useRef(0);
+  const moveCount = useRef(0);
+  const pulling = useRef(false);
+  const onTouchStart: TouchEventHandler = (e) => {
+    const scrollTop = containerRef.current!.scrollTop;
+    if (scrollTop !== 0) {return};
+    pulling.current = true;
+    lastYRef.current = e.touches[0].clientY;
+    moveCount.current = 0
+  };
+
+  const onTouchMove: TouchEventHandler = (e) => {
+    moveCount.current+= 1;
+    const deltaY = e.touches[0].clientY - lastYRef.current;
+    if (moveCount.current === 1 && deltaY < 0) {
+      pulling.current = false;
+      return;
+    }
+    if (!pulling.current) {
+      return;
+    }
+    setTranslateY(deltaY + translateY);
+    lastYRef.current = e.touches[0].clientY;
+  };
+  const onTouchEnd: TouchEventHandler = () => {
+    setTranslateY(0);
+  };
   return (
     <div className="tui-scroll" {...rest}>
-      <div className="tui-scroll-inner" style={{right: -scrollbarWidth()}}
+      <div className="tui-scroll-inner" style={{right: -scrollbarWidth(), transform: `translateY(${translateY}px)`}}
            ref={containerRef}
-           onScroll={onScroll}>
+           onScroll={onScroll}
+           onTouchMove={onTouchMove}
+           onTouchStart={onTouchStart}
+           onTouchEnd={onTouchEnd}>
         {props.children}
       </div>
       {scrollBarVisible &&
