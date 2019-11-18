@@ -6,11 +6,14 @@ import {UIEventHandler} from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
 }
+// 判断是否是触屏
+// const isTouchDevice: boolean = 'ontouchstart' in document.documentElement;
 
 const Scroll: React.FunctionComponent<Props> = (props) => {
   const {children, ...rest} = props;
   const [barHeight, setBarHeight] = useState(0);
   const [barTop, _setBarTop] = useState(0);
+  const [scrollBarVisible, setScrollBarVisible] = useState(false)
   const setBarTop = (number: number) => {
     const {current} = containerRef;
     const scrollHeight = current!.scrollHeight; // 滚动全高
@@ -20,12 +23,20 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     if (number > maxBarTop) {return;}
     _setBarTop(number);
   };
+  const timerIdRef = useRef<number | null>(null);
   const onScroll: UIEventHandler = (e) => {
+    setScrollBarVisible(true);
     const {current} = containerRef;
     const scrollHeight = current!.scrollHeight; // 滚动全高
     const viewHeight = current!.getBoundingClientRect().height; // 可视区域高度
     const scrollTop = current!.scrollTop;
     setBarTop(scrollTop * viewHeight / scrollHeight);
+    if (timerIdRef.current !== null){
+      window.clearTimeout(timerIdRef.current!)
+    }
+    timerIdRef.current = window.setTimeout(()=>{
+      setScrollBarVisible(false);
+    }, 300);
   };
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => { // mounted的时候 算滚动条的高度
@@ -34,6 +45,11 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     const viewHeight = current!.getBoundingClientRect().height; // 可视区域高度
     setBarHeight(viewHeight * viewHeight / scrollHeight);
   }, []);
+
+  useEffect(()=>{
+
+  }, [scrollBarVisible]);
+
   const draggingRef = useRef(false);
   const firstYRef = useRef(0);
   const firstBarTopRef = useRef(0);
@@ -80,11 +96,12 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
            onScroll={onScroll}>
         {props.children}
       </div>
+      {scrollBarVisible &&
       <div className="tui-scroll-track">
         <div className="tui-scroll-bar" style={{height: barHeight, transform: `translateY(${barTop}px)`}}
              onMouseDown={onMouseDownBar}
         />
-      </div>
+      </div>}
     </div>
   );
 };
