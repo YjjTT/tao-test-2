@@ -138,6 +138,12 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
              onMouseDown={onMouseDownBar}
         />
       </div>}
+      <div className="tui-scroll-pulling" style={{height: translateY}}>
+        {translateY===150?
+          <span className="tui-scroll-pulling-text">释放手指即可刷新</span>
+          :
+          <span className="tui-scroll-pulling-icon">↓</span>}
+      </div>
     </div>
   );
 };

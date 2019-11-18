@@ -11,7 +11,6 @@
     &::-webkit-scrollbar {
       display: none;
     }
-    border: 1px solid black;
   }
   &-track {
     width: 10px;
@@ -29,4 +28,17 @@
     background: rgba(128, 128, 128, 0.8);
     border-radius: 3px;
   }
+  &-pulling {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-text{
+      font-size: 12px;
+    }
+    &-icon{
+      font-size: 30px;
+    }
+  }
+
 }
