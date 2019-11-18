@@ -5,6 +5,7 @@ import scrollbarWidth from './scroll-width';
 import {UIEventHandler} from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
+  onPull?: ()=>void;
 }
 
 // 判断是否是触屏
@@ -120,7 +121,11 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     lastYRef.current = e.touches[0].clientY;
   };
   const onTouchEnd: TouchEventHandler = () => {
-    setTranslateY(0);
+    if (pulling.current){
+      setTranslateY(0);
+      props.onPull && props.onPull();
+      pulling.current = false;
+    }
   };
   return (
     <div className="tui-scroll" {...rest}>
